@@ -23,7 +23,7 @@ mvn clean spring-boot:run -Dserver.port=8080
 
 ### Running from docker
 ```bash
-docker run -p 8080:8080 icankeep/web-terminal:0.0.1.beta1.6832523
+docker run -p 8080:8080 icankeep/web-terminal:latest
 
 # open browser http://localhost:8080/
 ```
