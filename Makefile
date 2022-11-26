@@ -1,7 +1,7 @@
 DOCKER_REPO ?= icankeep/web-terminal
 COMMIT_ID := $(shell git log -1 --pretty=%h)
-COMMIT_TAG := $(shell git describe --tags ${COMMIT_ID})
-COMMIT := $(shell if [[ -z "$$(git status --porcelain)" ]]; then ${COMMIT_ID}; else echo ${COMMIT_ID}-dirty; fi)
+COMMIT_TAG := $(shell git describe --tags)
+COMMIT := $(shell if [[ -z "$$(git status --porcelain)" ]]; then echo ${COMMIT_ID}; else echo ${COMMIT_ID}-dirty; fi)
 VERSION := $(shell if [[ -n "${COMMIT_TAG}" ]]; then echo "${COMMIT_TAG}"; else echo "beta"; fi)
 TAG := ${VERSION}.${COMMIT}
 
