@@ -1,3 +1,4 @@
+SHELL:=/bin/bash
 DOCKER_REPO ?= icankeep/web-terminal
 COMMIT_ID := $(shell git log -1 --pretty=%h)
 COMMIT_TAG := $(shell git describe --tags)
