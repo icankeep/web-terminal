@@ -16,6 +16,10 @@ $(warning "==============================")
 
 $(warning "Build Starting...")
 
+version:
+	git tag ${version}
+	git push origin ${version}
+
 build:
 	./mvnw clean package -Dmaven.test.skip=true
 	docker build --tag ${DOCKER_REPO}:${TAG} --build-arg JAR_FILE=target/web-terminal-*.jar .
