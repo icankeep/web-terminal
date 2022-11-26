@@ -1,7 +1,25 @@
+SHELL:=/bin/bash
 DOCKER_REPO ?= icankeep/web-terminal
-VERSION ?= 0.0.1.beta1
-COMMIT := $(shell if [[ -z "$$(git status --porcelain)" ]]; then git log -1 --pretty=%h; else git log -1 --pretty=%h-dirty-$$RANDOM; fi)
+COMMIT_ID := $(shell git log -1 --pretty=%h)
+COMMIT_TAG := $(shell git describe --tags)
+COMMIT := $(shell if [[ -z "$$(git status --porcelain)" ]]; then echo ${COMMIT_ID}; else echo ${COMMIT_ID}-dirty; fi)
+VERSION := $(shell if [[ -n "${COMMIT_TAG}" ]]; then echo "${COMMIT_TAG}"; else echo "beta"; fi)
 TAG := ${VERSION}.${COMMIT}
+
+$(warning "==============================")
+$(warning "ARG INFO")
+$(warning "COMMIT_ID: ${COMMIT_ID}")
+$(warning "COMMIT_TAG: ${COMMIT_TAG}")
+$(warning "COMMIT: ${COMMIT}")
+$(warning "VERSION: ${VERSION}")
+$(warning "TAG: ${TAG}")
+$(warning "==============================")
+
+$(warning "Build Starting...")
+
+version:
+	git tag ${version}
+	git push origin ${version}
 
 build:
 	./mvnw clean package -Dmaven.test.skip=true
@@ -10,4 +28,8 @@ build:
 push:
 	docker push ${DOCKER_REPO}:${TAG}
 
-release: build push
+tag:
+	docker tag ${DOCKER_REPO}:${TAG} ${DOCKER_REPO}:latest
+	docker push ${DOCKER_REPO}:latest
+
+release: build push tag
