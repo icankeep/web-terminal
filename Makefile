@@ -1,5 +1,6 @@
 SHELL:=/bin/bash
 DOCKER_REPO ?= icankeep/web-terminal
+BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 COMMIT_ID := $(shell git log -1 --pretty=%h)
 COMMIT_TAG := $(shell git describe --tags)
 COMMIT := $(shell if [[ -z "$$(git status --porcelain)" ]]; then echo ${COMMIT_ID}; else echo ${COMMIT_ID}-dirty; fi)
@@ -20,6 +21,7 @@ $(warning "Build Starting...")
 version:
 	git tag ${version}
 	git push origin ${version}
+	git push origin ${BRANCH}
 
 build:
 	./mvnw clean package -Dmaven.test.skip=true

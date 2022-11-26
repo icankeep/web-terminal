@@ -1,7 +1,10 @@
 <!doctype html>
-<title>Term.d</title>
-
-<h1>Term.d</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Web Terminal</title>
+</head>
 
 <style>
     html {
@@ -17,7 +20,7 @@
         float: left;
         border: #000 solid 5px;
         font-family: "DejaVu Sans Mono", "Liberation Mono", monospace;
-        font-size: 11px;
+        font-size: 16px;
         color: #f0f0f0;
         background: #000;
     }
@@ -26,30 +29,9 @@
         color: #000;
         background: #f0f0f0;
     }
-</style><!--<script src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>-->
-<script src="term.js"></script>
+</style>
 
-<script type="text/javascript">
-    window.addEventListener('load', function () {
-        var socket = new WebSocket('ws://localhost:8080/ws');
-        socket.onopen = function () {
-            var term = new Terminal({cols: 200, rows: 100, screenKeys: true});
-            socket.onmessage = function (event) {
-                if (event.type === 'message') {
-                    var data = event.data;
-                    term.write(data);
-                }
-            };
-            socket.onclose = function () {
-                socket.onmessage = null;
-                socket.onclose = null;
-                term.destroy();
-            };
-            term.on('data', function (data) {
-                socket.send(JSON.stringify({action: 'read', data: data}));
-            });
-            term.open(document.body);
-        };
-    });
-</script>
-
+<body>
+    <script src="term.js"></script>
+    <script src="terminal.js"></script>
+</body>

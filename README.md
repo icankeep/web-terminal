@@ -3,9 +3,10 @@
 A Web terminal based on SpringBoot Websocket
 
 ## TODO List
-- [ ] optimize code
-- [ ] resize window
-- [ ] support window
+- [x] optimize code
+- [x] resize window
+- [x] support window system
+- [ ] terminal management
 
 ## Run
 
