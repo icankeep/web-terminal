@@ -9,13 +9,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.passer.demo</groupId>
-    <artifactId>websocket</artifactId>
+    <artifactId>web-terminal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>websocket</name>
+    <name>web-terminal</name>
     <description>demo of spring websocket</description>
-<!--    <properties>-->
-<!--        <java.version>11</java.version>-->
-<!--    </properties>-->
+    <properties>
+        <java.version>11</java.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
