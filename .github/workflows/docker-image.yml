@@ -17,7 +17,7 @@ jobs:
     - uses: actions/setup-java@v3.6.0
       with: 
         java-version: 11
-        distribution: oracle
+        distribution: zulu
         
     - name: Build the Docker image
       run: make release
