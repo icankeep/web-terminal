@@ -18,6 +18,9 @@ jobs:
       with: 
         java-version: 11
         distribution: zulu
-        
+    - uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_TOKEN }}
     - name: Build the Docker image
       run: make release
